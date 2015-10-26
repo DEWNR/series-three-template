@@ -1,0 +1,25 @@
+/*------------------------------------*\
+    #SPECIFIC SETTINGS
+\*------------------------------------*/
+
+/**
+ * Site settings that have specific uses, such as controlling which classes
+ * are output or the design of a particular object or component. Builds on
+ * the series's settings.
+ **/
+
+// Import the series settings
+
+@import "dewnr-series-three/sass/_settings.specific.scss";
+
+
+
+
+
+/* == COMPONENTS == */
+
+/* === SPOTLIGHT === */
+
+$sagovau-spotlight-image-left-offset:       0px;    // The gap to the left of the spotlight image on huge devices. (This gap is hidden by the spotight overlay.)
+$sagovau-spotlight-overlay-width:           0px;    // The width of the spotlight overlay at its widest point.
+$sagovau-spotlight-overlay-padding-right:   0px;   // The amount of padding on the right of the spotlight overlay. (This is used to keep the text within the overlay.)
