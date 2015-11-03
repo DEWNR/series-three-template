@@ -1,3 +1,4 @@
+/*jshint node:true*/
 'use strict';
 
 var argv = require('yargs').argv,   // Pass agruments using the command line
@@ -11,6 +12,7 @@ var argv = require('yargs').argv,   // Pass agruments using the command line
     fs = require('fs'), // File system; used to check if files exist
     jsonfile = require('jsonfile'), // Read JSON data
     gulp = require('gulp'),
+    gUtil = require('gulp-util'), // Logging and errors
     htmlmin = require('gulp-html-minifier'),
     htmlminOptions,
     imagemin = require('gulp-imagemin'),    // Optimise images
@@ -38,7 +40,7 @@ var argv = require('yargs').argv,   // Pass agruments using the command line
 
     // Set the variables for the root folders
 
-    var dest = argv.production ? "public/" : "temp/",    // Use the public folder for a "production" build or the temp folder for all other builds
+    var dest = argv.production ? "dist/" : "temp/",    // Use the public folder for a "production" build or the temp folder for all other builds
         src = "./";
 
 
@@ -69,7 +71,7 @@ var argv = require('yargs').argv,   // Pass agruments using the command line
 
     paths.src.js = src + "js/";
 
-    paths.src.sass = src + "sass/"
+    paths.src.sass = src + "sass/";
 
 }());
 
@@ -125,28 +127,6 @@ minifyCssOptions = {
 };
 
 
-mustacheData = {
-    categories: [
-        {title: 'Category 1', url: '/category-1'},
-        {title: 'Category 2', url: '/category-2'},
-        {title: 'Category 3', url: '/category-3'},
-        {title: 'Category 4', url: '/category-4'}
-    ],
-    menuItems: [
-        {title: 'Menu Item 1', url: '/menu-item-1'},
-        {title: 'Menu Item 2', url: '/menu-item-2'},
-        {title: 'Menu Item 3', url: '/menu-item-3'},
-        {title: 'Menu Item 4', url: '/menu-item-4'},
-        {title: 'Menu Item 5', url: '/menu-item-5'}
-    ]
-};
-
-mustachePartials = {
-    categoryList: paths.src.html + 'mustache/category-list.mustache',
-    menuItemList: paths.src.html + 'mustache/menu-item-list.mustache'
-};
-
-
 revManifestOptions = {
     base: paths.dest,  // Necessary to allow merging;
     merge: true
@@ -198,6 +178,16 @@ jsList = [
 
 
 
+// Define Mustache data and partials
+
+mustacheData = {};
+
+mustachePartials = {};
+
+
+
+
+
 // Redefine some optimisation processes so they're not used in development
 
 if (!argv.production) {
@@ -218,6 +208,8 @@ if (!argv.production) {
 gulp.task('clean', function () {
     if (argv.production) {
         del.sync([paths.dest]);
+        fs.mkdirSync(paths.dest);
+        fs.writeFileSync(paths.manifest, '{}', 'utf8'); // Create empty manifest
     }
 });
 
@@ -234,8 +226,11 @@ gulp.task('html', function () {
 
     var manifest = fs.existsSync(paths.manifest) ? jsonfile.readFileSync(paths.manifest, {throws: false}) : null;
 
-    if (!manifest && argv.production) {
-        console.log("Error: a manifest must be present when running this task in production mode");
+    if (manifest === null && argv.production) {
+        throw new gUtil.PluginError({
+            plugin: 'html',
+            message: 'Error: a manifest must be present when running this task in production mode'
+        });
     } else {
         return gulp.src(paths.src.html + '**/*.html')
             .pipe(mustache(mustacheData, {}, mustachePartials))
@@ -251,7 +246,10 @@ gulp.task('html:watch', function () {
     if (!argv.production) {
         gulp.watch(paths.src.html + '**/*.{html,mustache}', ['html']);
     } else {
-        console.log('This task should not be run in production mode as it may cause problems with fingerprinting.')
+        throw new gUtil.PluginError({
+            plugin: 'html:watch',
+            message: 'This task should not be run in production mode as it may cause problems with fingerprinting.'
+        });
     }
 });
 
@@ -275,7 +273,10 @@ gulp.task('imagemin:watch', function () {
     if (!argv.production) {
         gulp.watch(paths.src.images + '*', ['imagemin']);
     } else {
-        console.log('This task should not be run in production mode as it may cause problems with fingerprinting.')
+        throw new gUtil.PluginError({
+            plugin: 'imagemin:watch',
+            message: 'This task should not be run in production mode as it may cause problems with fingerprinting.'
+        });
     }
 });
 
@@ -316,7 +317,10 @@ gulp.task('js-concat:watch', function () {
     if (!argv.production) {
         gulp.watch(paths.src.js + '**/*.js', ['js-concat']);
     } else {
-        console.log('This task should not be run in production mode as it may cause problems with fingerprinting.')
+        throw new gUtil.PluginError({
+            plugin: 'js-concat:watch',
+            message: 'This task should not be run in production mode as it may cause problems with fingerprinting.'
+        });
     }
 });
 
@@ -332,9 +336,12 @@ gulp.task('sass', function () {
     // results will be cached.
 
     var manifest = fs.existsSync(paths.manifest) ? jsonfile.readFileSync(paths.manifest, {throws: false}) : null;
-
-    if (!manifest && argv.production) {
-        console.log("Error: a manifest must be present when running this task in production mode");
+console.log(manifest);
+    if (manifest === null && argv.production) {
+        throw new gUtil.PluginError({
+            plugin: 'sass',
+            message: 'Error: a manifest must be present when running this task in production mode'
+        });
     } else {
         return gulp.src(paths.src.sass + '**/*.scss', {base: paths.src.root})  // Use root as base to get paths in rev-manifest.json
             .pipe(sass(sassOptions)
@@ -358,7 +365,10 @@ gulp.task('sass:watch', function () {
     if (!argv.production) {
         gulp.watch(paths.src.sass + '**/*.scss', ['sass']);     // TODO consider changing to gulp-watch so new files are detected
     } else {
-        console.log('This task should not be run in production mode as it may cause problems with fingerprinting.')
+        throw new gUtil.PluginError({
+            plugin: 'sass:watch',
+            message: 'This task should not be run in production mode as it may cause problems with fingerprinting.'
+        });
     }
 });
 
@@ -394,5 +404,5 @@ gulp.task('build:watch', ['html:watch', 'imagemin:watch', 'js-concat:watch', 'sa
 // Build, serve and watch
 
 gulp.task('default', function(callback) {
-    runSequence('build', 'serve', 'build:watch', callback)
+    runSequence('build', 'serve', 'build:watch', callback);
 });
