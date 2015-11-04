@@ -336,7 +336,7 @@ gulp.task('sass', function () {
     // results will be cached.
 
     var manifest = fs.existsSync(paths.manifest) ? jsonfile.readFileSync(paths.manifest, {throws: false}) : null;
-console.log(manifest);
+
     if (manifest === null && argv.production) {
         throw new gUtil.PluginError({
             plugin: 'sass',
