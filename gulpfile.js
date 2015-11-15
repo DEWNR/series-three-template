@@ -73,6 +73,8 @@ var argv = require('yargs').argv,   // Pass agruments using the command line
 
     paths.src.sass = src + "sass/";
 
+    paths.src.templates = "./node_modules/dewnr-series-three/templates/";
+
 }());
 
 
@@ -180,9 +182,28 @@ jsList = [
 
 // Define Mustache data and partials
 
-mustacheData = {};
+mustacheData = {
+  "navigation-tiles": [
+    {
+      "navigation-tile-url": "#",
+      "navigation-tile-title": "Navigation Title 1",
+      "navigation-tile-teaser": "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+    },{
+      "navigation-tile-url": "#",
+      "navigation-tile-title": "Navigation Title 2",
+      "navigation-tile-teaser": "Nam id nibh ac lacus molestie consequat. Nunc vel arcu at nisl volutpat mollis a id sem."
+    },{
+      "navigation-tile-url": "#",
+      "navigation-tile-title": "Navigation Title 3",
+      "navigation-tile-teaser": "Donec ante justo, scelerisque eget mauris id"
+    }
+  ]
+};
 
-mustachePartials = {};
+mustachePartials = {
+  "navigation-tiles": paths.src.templates + "partials/navigation-tile.mustache"
+};
+
 
 
 
@@ -214,6 +235,17 @@ gulp.task('clean', function () {
 });
 
 
+
+// Create Mustache template files
+
+gulp.task('mustache', function () {
+  gulp.src(paths.src.templates + "*.mustache")
+      .pipe(mustache(
+        mustacheData,
+        {},
+        mustachePartials
+      )).pipe(gulp.dest(paths.dest));
+});
 
 
 
