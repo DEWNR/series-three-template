@@ -183,6 +183,20 @@ jsList = [
 // Define Mustache data and partials
 
 mustacheData = {
+  "file_path": "http://www.environment.sa.gov.au/files/templates/00000000-0000-0000-0000-000000000000/f88a7f3c-df7e-430a-825c-24cfa8dec9a8",
+  "site_url": "http://www.environment.sa.gov.au",
+  "feature-modules": [
+    {
+      "feature-module-url": "#",
+      "feature-module-title": "Feature Title 1"
+    },{
+      "feature-module-url": "#",
+      "feature-module-title": "Feature Title 2"
+    },{
+      "feature-module-url": "#",
+      "feature-module-title": "Feature Title 3"
+    }
+],
   "navigation-tiles": [
     {
       "navigation-tile-url": "#",
@@ -196,12 +210,26 @@ mustacheData = {
       "navigation-tile-url": "#",
       "navigation-tile-title": "Navigation Title 3",
       "navigation-tile-teaser": "Donec ante justo, scelerisque eget mauris id"
+    },{
+      "navigation-tile-url": "#",
+      "navigation-tile-title": "Navigation Title 4",
+      "navigation-tile-teaser": "Nunc vel arcu at nisl volutpat mollis a id sem."
     }
   ]
 };
 
 mustachePartials = {
-  "navigation-tiles": paths.src.templates + "partials/navigation-tile.mustache"
+  "_header": paths.src.templates + "partials/_header.mustache",
+  "_footer": paths.src.templates + "partials/_footer.mustache",
+  "feature-modules": paths.src.templates + "partials/feature-module.mustache",
+  "navigation-tiles": paths.src.templates + "partials/navigation-tile.mustache",
+  "site-header": paths.src.templates + "partials/site-header.mustache",
+  "primary-navigation": paths.src.templates + "partials/primary-navigation.mustache",
+  "secondary-navigation": paths.src.templates + "partials/secondary-navigation.mustache",
+  "site-footer": paths.src.templates + "partials/site-footer.mustache",
+  "social": paths.src.templates + "partials/social.mustache",
+  "site-search": paths.src.templates + "partials/site-search.mustache",
+  "sitemap": paths.src.templates + "partials/sitemap.mustache"
 };
 
 
