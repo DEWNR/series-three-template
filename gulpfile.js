@@ -67,7 +67,7 @@ var _ = require('lodash'),
 
     paths.src.root = src;
 
-    paths.src.html = src + "html/";
+    paths.src.html = src + "patterns/";
 
     paths.src.images = src + "images/";
 
@@ -75,7 +75,7 @@ var _ = require('lodash'),
 
     paths.src.sass = src + "sass/";
 
-    paths.src.templates = "./node_modules/dewnr-series-three/templates/";
+    paths.src.remotePatterns = "./node_modules/dewnr-series-three/patterns";
 
 }());
 
@@ -253,7 +253,7 @@ rashtache = function (folders) {
 };
 
 // Load the data, starting the the furthest ancestor
-data = rashtache(['./patterns']);
+data = rashtache([paths.src.remotePatterns, paths.src.html]);
 
 
 
@@ -288,7 +288,7 @@ gulp.task('html', function () {
             message: 'Error: a manifest must be present when running this task in production mode'
         });
     } else {
-        data = rashtache(['./patterns']);
+        data = rashtache([paths.src.remotePatterns, paths.src.html]);
 
         return gulp.src(paths.src.html + '**/*.html')
             // Load the data, starting the the furthest ancestor
