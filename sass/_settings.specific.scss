@@ -34,7 +34,7 @@ $sagovau-site-header-logo-height: 120px;
     background-color: tint($sagovau-color-brand, 13%);
 
     @include media-query(small-and-up) {
-        background-image: url("../images/#{$sagovau-path-svg}#{$sagovau-file-prefix}-header-background.svg");
+        background-image: url("#{$sagovau-path-svg}#{$sagovau-file-prefix}-header-background.svg");
         background-position: 320px 0;
         background-repeat: no-repeat;
     }
@@ -52,6 +52,6 @@ $sagovau-sitemap-background: "#{$sagovau-path-svg}#{$sagovau-file-prefix}-sitema
 
 /* === SPOTLIGHT === */
 
-$sagovau-spotlight-image-left-offset: 0;    // The gap to the left of the spotlight image on huge devices. (This gap is hidden by the spotight overlay.)
-$sagovau-spotlight-overlay-width: 0;    // The width of the spotlight overlay at its widest point.
-$sagovau-spotlight-overlay-padding-right: 0;   // The amount of padding on the right of the spotlight overlay. (This is used to keep the text within the overlay.)
+$sagovau-spotlight-image-left-offset: 182px; // The gap to the left of the spotlight image on huge devices. (This gap is hidden by the spotight overlay.)
+$sagovau-spotlight-overlay-width: 464px; // The width of the spotlight overlay at its widest point.
+$sagovau-spotlight-overlay-padding-right: 100px; // The amount of padding on the right of the spotlight overlay. (This is used to keep the text within the overlay.)

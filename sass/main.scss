@@ -88,7 +88,7 @@
 @import "inuit-lists/base.lists";
 
 
-/* == Global == */
+/* == Bedrock == */
 
 @import "dewnr-bedrock/sass/base.blockquote";
 @import "dewnr-bedrock/sass/base.fonts";
@@ -96,6 +96,7 @@
 @import "dewnr-bedrock/sass/base.headings";
 @import "dewnr-bedrock/sass/base.main";
 @import "dewnr-bedrock/sass/base.page";
+@import "dewnr-bedrock/sass/base.tables";
 
 
 
@@ -113,7 +114,7 @@
 @import "inuit-tables/objects.tables";
 
 
-/* == Global == */
+/* == Bedrock == */
 
 @import "dewnr-bedrock/sass/objects.delimited";
 @import "dewnr-bedrock/sass/objects.fixed-aspect-ratio";
@@ -127,7 +128,7 @@
 
 /* = Components = */
 
-/* == Global == */
+/* == Bedrock == */
 
 @import "dewnr-bedrock/sass/components.seamless-form";
 
@@ -138,7 +139,6 @@
 @import "dewnr-series-three/sass/components.feature-module";
 @import "dewnr-series-three/sass/components.icon-module";
 @import "dewnr-series-three/sass/components.image-gallery";
-@import "dewnr-series-three/sass/components.page-shadow";
 @import "dewnr-series-three/sass/components.navigation-tile";
 @import "dewnr-series-three/sass/components.primary-navigation";
 @import "dewnr-series-three/sass/components.related-information";
