@@ -2,3 +2,5 @@
 *.log
 node_modules/
 temp/
+dist/images
+dist/*.html
