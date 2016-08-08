@@ -1,0 +1,30 @@
+/*------------------------------------*\
+    #PRIMARY SETTINGS
+\*------------------------------------*/
+
+/**
+ * The site's general settings. Builds on the series' general settings.
+ */
+
+// Import the series settings
+
+@import 'dewnr-series-three/src/stylesheets/settings.general';
+
+
+
+
+
+/* = File locations and prefixes = */
+
+$sagovau-file-prefix: 'S3';
+
+$sagovau-path-png: '../images/';
+$sagovau-path-svg: '../images/';
+
+
+
+
+
+/* = Colours = */
+
+$sagovau-color-brand:   #002855;

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg class="social__icon  social__icon--round" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30">
+
+    <path d="M0,0 L0,30 L30,30 L30,0 L0,0 Z M18.8,9.5 L17,9.5 C16.7,9.5 16.3,9.7 16.3,10.3 L16.3,12 L18.9,12 L18.7,14.9 L16.3,14.9 L16.3,23.2 L12.8,23.2 L12.8,14.9 L11.2,14.9 L11.2,12 L12.8,12 L12.8,10.1 C12.8,8.7 13.4,6.6 16.3,6.6 L18.9,6.6 L18.9,9.5 L18.8,9.5 Z" />
+
+</svg>

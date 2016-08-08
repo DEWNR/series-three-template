@@ -1,0 +1,25 @@
+/*------------------------------------*\
+    #SPECIFIC SETTINGS
+\*------------------------------------*/
+
+/**
+ * Site settings that have specific uses, such as controlling which classes
+ * are output or the design of a particular object or component. Builds on
+ * the group's settings.
+ **/
+
+// Import the group settings
+
+@import 'dewnr-series-three/src/stylesheets/settings.specific';
+
+
+
+
+
+/* == COMPONENTS == */
+
+/* === SPOTLIGHT === */
+
+$sagovau-spotlight-image-left-offset:       240px;
+$sagovau-spotlight-overlay-width:           575px;
+$sagovau-spotlight-overlay-padding-right:   240px;

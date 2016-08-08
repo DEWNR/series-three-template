@@ -2,5 +2,5 @@
 *.log
 node_modules/
 temp/
-dist/images
-dist/*.html
+public/
+src/html/data/global.json
